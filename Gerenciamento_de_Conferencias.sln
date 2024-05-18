@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1BA070EE-6847-4B80-90BC-94B7B158FC96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{AE530CAA-94BC-4C8B-A316-B3557911A241}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento_Conferencias", "Gerenciamento_Conferencias\Gerenciamento_Conferencias.csproj", "{8F1A9936-86B1-4709-85EE-945064FA7588}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F1A9936-86B1-4709-85EE-945064FA7588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F1A9936-86B1-4709-85EE-945064FA7588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F1A9936-86B1-4709-85EE-945064FA7588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F1A9936-86B1-4709-85EE-945064FA7588}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE530CAA-94BC-4C8B-A316-B3557911A241} = {1BA070EE-6847-4B80-90BC-94B7B158FC96}
+		{8F1A9936-86B1-4709-85EE-945064FA7588} = {AE530CAA-94BC-4C8B-A316-B3557911A241}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4D671AF-A718-43E0-B517-785815E7DD25}
+	EndGlobalSection
+EndGlobal

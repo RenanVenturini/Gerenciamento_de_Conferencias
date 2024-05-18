@@ -1,0 +1,6 @@
+@Gerenciamento_Conferencias_HostAddress = http://localhost:5145
+
+GET {{Gerenciamento_Conferencias_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
