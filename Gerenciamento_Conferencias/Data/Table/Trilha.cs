@@ -6,9 +6,8 @@ namespace Gerenciamento_Conferencias.Data.Table
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public List<Sessao> SessoesMatutinas { get; set; }
-        public List<Sessao> SessoesVespertinas { get; set; }
+        public List<DateTime> HorariosDisponiveis { get; set; }
+        public List<Palestra> Palestras { get; set; }
         public int ConferenciaId { get; set; }
-        public Conferencia Conferencia { get; set; }
     }
 }

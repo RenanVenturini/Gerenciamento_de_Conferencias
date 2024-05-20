@@ -9,34 +9,30 @@ namespace Gerenciamento_Conferencias.Data
 
         public DbSet<Conferencia> Conferencias { get; set; }
         public DbSet<Palestra> Palestras { get; set; }
-        public DbSet<Sessao> Sessoes { get; set; }
         public DbSet<Trilha> Trilhas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Conferencia>().ToTable("TbConferencia");
+            modelBuilder.Entity<Palestra>().ToTable("TbPalestra");
+            modelBuilder.Entity<Trilha>().ToTable("TbTrilha");
+
+            // Relacionamento entre Conferencia e Trilha (1:N)
+            modelBuilder.Entity<Conferencia>().ToTable("TbConferencia");
+            modelBuilder.Entity<Conferencia>()
+                .HasMany(c => c.Trilhas)
+                .WithOne()
+                .HasForeignKey(t => t.ConferenciaId);
+
+            // Relacionamento entre Trilha e Palestra (1:N)
             modelBuilder.Entity<Trilha>()
-                .HasOne(t => t.Conferencia)
-                .WithMany(c => c.Trilhas)
-                .HasForeignKey(t => t.ConferenciaId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasMany(t => t.Palestras)
+                .WithOne()
+                .HasForeignKey(p => p.TrilhaId);
 
-            modelBuilder.Entity<Sessao>()
-                .HasOne(s => s.Trilha)
-                .WithMany(t => t.SessoesMatutinas)
-                .HasForeignKey(s => s.TrilhaId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Sessao>()
-                .HasOne(s => s.Trilha)
-                .WithMany(t => t.SessoesVespertinas)
-                .HasForeignKey(s => s.TrilhaId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Palestra>()
-                .HasOne(p => p.Sessao)
-                .WithMany(s => s.Palestras)
-                .HasForeignKey(p => p.SessaoId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // Configuração adicional para listas de HorariosDisponiveis (evitar erros de mapeamento)
+            modelBuilder.Entity<Trilha>()
+                .Ignore(t => t.HorariosDisponiveis);
         }
     }
 }

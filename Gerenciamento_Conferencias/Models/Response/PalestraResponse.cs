@@ -1,13 +1,12 @@
-﻿using System;
-
-namespace Gerenciamento_Conferencias.Data.Table
+﻿namespace Gerenciamento_Conferencias.Models.Response
 {
-    public class Palestra
+    public class PalestraResponse
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime Inicio { get; set; }
         public int Duracao { get; set; }
         public int TrilhaId { get; set; }
+        public string Sessao { get; set; }
     }
 }
