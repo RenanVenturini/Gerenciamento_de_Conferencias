@@ -4,8 +4,9 @@ namespace Gerenciamento_Conferencias.Models.Request
 {
     public class AtualizarConferenciaRequest
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Local { get; set; }
-        public List<Trilha> Trilhas { get; set; }
+        public List<AtualizarTrilhaRequest> Trilhas { get; set; }
     }
 }

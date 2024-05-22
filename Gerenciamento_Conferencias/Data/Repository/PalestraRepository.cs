@@ -27,6 +27,8 @@ namespace Gerenciamento_Conferencias.Data.Repository
 
         public async Task<List<Palestra>> ListarPalestraAsync(int trilhaId)
             => await _context.Palestras
+            .Include(x => x.Trilha)
+            .ThenInclude(x => x.NetworkingEvent)
             .Where(t => t.TrilhaId == trilhaId)
             .ToListAsync();
 
@@ -37,6 +39,15 @@ namespace Gerenciamento_Conferencias.Data.Repository
         {
             _context.Remove(palestra);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<string> ObterNetwork(int trilhaId)
+        {
+            return await _context.Trilhas
+                .Where(x => x.Id == trilhaId)
+                .Select(x => x.NetworkingEvent)
+                .Select(x => x.Inicio)
+                .FirstOrDefaultAsync();
         }
     }
 }

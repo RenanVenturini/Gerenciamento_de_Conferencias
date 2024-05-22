@@ -29,11 +29,15 @@ namespace Gerenciamento_Conferencias.Data.Repository
             => await _context.Conferencias
             .Include(t => t.Trilhas)
             .ThenInclude(p => p.Palestras)
+            .Include(t => t.Trilhas)
+            .ThenInclude(p => p.NetworkingEvent)
             .ToListAsync();
         public async Task<Conferencia> ObterConferenciaPorIdAsync(int id)
             => await _context.Conferencias
             .Include(t => t.Trilhas)
             .ThenInclude(p => p.Palestras)
+            .Include(t => t.Trilhas)
+            .ThenInclude(p => p.NetworkingEvent)
             .FirstOrDefaultAsync(c => c.Id == id);
 
         public async Task ExcluirConferenciaAsync(Conferencia conferencia)

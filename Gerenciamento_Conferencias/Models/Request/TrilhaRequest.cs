@@ -2,10 +2,9 @@
 
 namespace Gerenciamento_Conferencias.Models.Request
 {
-    public class ConferenciaRequest
+    public class TrilhaRequest
     {
         public string Nome { get; set; }
-        public string Local { get; set; }
-        public List<TrilhaRequest> Trilhas { get; set; }
+        public NetworkingEventRequest NetworkingEvent { get; set; }
     }
 }

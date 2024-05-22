@@ -1,4 +1,7 @@
 using Gerenciamento_Conferencias.Configuration;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,36 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.ContentType = "application/json";
+
+        var ex = context.Features.Get<IExceptionHandlerFeature>()?.Error;
+
+        if (ex != null)
+        {
+            var statusCode = HttpStatusCode.InternalServerError;
+
+            switch (ex)
+            {
+                case BadHttpRequestException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    break;
+                default:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    break;
+            }
+
+            context.Response.StatusCode = (int)statusCode;
+
+            var errorMessage = JsonConvert.SerializeObject(new { error = ex.Message });
+            await context.Response.WriteAsync(errorMessage).ConfigureAwait(false);
+        }
+    });
+});
 
 app.UseHttpsRedirection();
 

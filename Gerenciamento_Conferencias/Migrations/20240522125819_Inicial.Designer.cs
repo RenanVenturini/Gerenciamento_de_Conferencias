@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciamento_Conferencias.Migrations
 {
     [DbContext(typeof(GerenciamentoConferenciasContext))]
-    [Migration("20240519131437_Initial")]
-    partial class Initial
+    [Migration("20240522125819_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,31 @@ namespace Gerenciamento_Conferencias.Migrations
                     b.ToTable("TbConferencia", (string)null);
                 });
 
+            modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.NetworkingEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Inicio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrilhaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrilhaId")
+                        .IsUnique();
+
+                    b.ToTable("TbNetworkingEvent", (string)null);
+                });
+
             modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.Palestra", b =>
                 {
                     b.Property<int>("Id")
@@ -55,18 +80,26 @@ namespace Gerenciamento_Conferencias.Migrations
                     b.Property<int>("Duracao")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Inicio")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Inicio")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sessao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrilhaId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TrilhaId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TrilhaId");
+
+                    b.HasIndex("TrilhaId1");
 
                     b.ToTable("TbPalestra", (string)null);
                 });
@@ -92,6 +125,17 @@ namespace Gerenciamento_Conferencias.Migrations
                     b.ToTable("TbTrilha", (string)null);
                 });
 
+            modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.NetworkingEvent", b =>
+                {
+                    b.HasOne("Gerenciamento_Conferencias.Data.Table.Trilha", "Trilha")
+                        .WithOne("NetworkingEvent")
+                        .HasForeignKey("Gerenciamento_Conferencias.Data.Table.NetworkingEvent", "TrilhaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trilha");
+                });
+
             modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.Palestra", b =>
                 {
                     b.HasOne("Gerenciamento_Conferencias.Data.Table.Trilha", null)
@@ -99,6 +143,12 @@ namespace Gerenciamento_Conferencias.Migrations
                         .HasForeignKey("TrilhaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Gerenciamento_Conferencias.Data.Table.Trilha", "Trilha")
+                        .WithMany()
+                        .HasForeignKey("TrilhaId1");
+
+                    b.Navigation("Trilha");
                 });
 
             modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.Trilha", b =>
@@ -117,6 +167,8 @@ namespace Gerenciamento_Conferencias.Migrations
 
             modelBuilder.Entity("Gerenciamento_Conferencias.Data.Table.Trilha", b =>
                 {
+                    b.Navigation("NetworkingEvent");
+
                     b.Navigation("Palestras");
                 });
 #pragma warning restore 612, 618

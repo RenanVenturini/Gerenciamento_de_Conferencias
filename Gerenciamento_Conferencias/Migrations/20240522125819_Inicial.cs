@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Gerenciamento_Conferencias.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,15 +45,38 @@ namespace Gerenciamento_Conferencias.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TbNetworkingEvent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Inicio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrilhaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TbNetworkingEvent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TbNetworkingEvent_TbTrilha_TrilhaId",
+                        column: x => x.TrilhaId,
+                        principalTable: "TbTrilha",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TbPalestra",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Inicio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Duracao = table.Column<int>(type: "int", nullable: false),
-                    TrilhaId = table.Column<int>(type: "int", nullable: false)
+                    TrilhaId = table.Column<int>(type: "int", nullable: false),
+                    Sessao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrilhaId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,12 +87,28 @@ namespace Gerenciamento_Conferencias.Migrations
                         principalTable: "TbTrilha",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TbPalestra_TbTrilha_TrilhaId1",
+                        column: x => x.TrilhaId1,
+                        principalTable: "TbTrilha",
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TbNetworkingEvent_TrilhaId",
+                table: "TbNetworkingEvent",
+                column: "TrilhaId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TbPalestra_TrilhaId",
                 table: "TbPalestra",
                 column: "TrilhaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TbPalestra_TrilhaId1",
+                table: "TbPalestra",
+                column: "TrilhaId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TbTrilha_ConferenciaId",
@@ -81,6 +119,9 @@ namespace Gerenciamento_Conferencias.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TbNetworkingEvent");
+
             migrationBuilder.DropTable(
                 name: "TbPalestra");
 

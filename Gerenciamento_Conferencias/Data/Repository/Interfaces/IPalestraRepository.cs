@@ -9,5 +9,6 @@ namespace Gerenciamento_Conferencias.Data.Repository.Interfaces
         Task<List<Palestra>> ListarPalestraAsync(int trilhaId);
         Task<Palestra> ObterPalestraPorId(int id);
         Task ExcluirPalestra(Palestra palestra);
+        Task<string> ObterNetwork(int trilhaId);
     }
 }
