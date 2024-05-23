@@ -222,8 +222,6 @@ namespace Gerenciamento_ConferenciasTests.service
 
                 var trilha = result?.Trilhas.FirstOrDefault();
 
-                var palestras = trilha?.Palestras.FirstOrDefault();
-
                 //Assert
                 Assert.NotNull(result);
                 Assert.NotNull(trilha);
@@ -231,13 +229,19 @@ namespace Gerenciamento_ConferenciasTests.service
                 Assert.Equal("Inteligencia Artificial", result.Nome);
                 Assert.Equal("Expo Center Norte", result.Local);
                 Assert.Equal("Futuro da IA", trilha.Nome);
-                Assert.Equal("10:00 Fundamentos do .NET 40min", palestras);
 
-                var resultado = new List<string> { "09:00 as 10:00", "10:40 as 12:00", "13:00 as 17:00" };
+                var resultadoPalestras = new List<string> { "10:00 Fundamentos do .NET 40min", "17:00 Networking Event" };
+
+                for (int i = 0; i < trilha?.Palestras.Count; i++)
+                {
+                    Assert.Equal(resultadoPalestras[i], trilha.Palestras[i]);
+                }
+
+                var resultadoHorarios = new List<string> { "09:00 as 10:00", "10:40 as 12:00", "13:00 as 17:00" };
 
                 for (int i = 0; i < trilha?.HorariosDisponiveis.Count; i++)
                 {
-                    Assert.Equal(resultado[i], trilha.HorariosDisponiveis[i]);
+                    Assert.Equal(resultadoHorarios[i], trilha.HorariosDisponiveis[i]);
                 }
             }
         }
@@ -305,8 +309,6 @@ namespace Gerenciamento_ConferenciasTests.service
 
                 var trilha = result?.Trilhas.FirstOrDefault();
 
-                var palestras = trilha?.Palestras.FirstOrDefault();
-
                 //Assert
                 Assert.NotNull(result);
                 Assert.NotNull(trilha);
@@ -314,13 +316,19 @@ namespace Gerenciamento_ConferenciasTests.service
                 Assert.Equal("Inteligencia Artificial", result.Nome);
                 Assert.Equal("Expo Center Norte", result.Local);
                 Assert.Equal("Futuro da IA", trilha.Nome);
-                Assert.Equal("10:00 Fundamentos do .NET 40min", palestras);
 
-                var resultado = new List<string> { "09:00 as 10:00", "10:40 as 12:00", "13:00 as 17:00" };
+                var resultadoPalestras = new List<string> { "10:00 Fundamentos do .NET 40min", "17:00 Networking Event" };
+
+                for (int i = 0; i < trilha?.Palestras.Count; i++)
+                {
+                    Assert.Equal(resultadoPalestras[i], trilha.Palestras[i]);
+                }
+
+                var resultadoHorarios = new List<string> { "09:00 as 10:00", "10:40 as 12:00", "13:00 as 17:00" };
 
                 for (int i = 0; i < trilha?.HorariosDisponiveis.Count; i++)
                 {
-                    Assert.Equal(resultado[i], trilha.HorariosDisponiveis[i]);
+                    Assert.Equal(resultadoHorarios[i], trilha.HorariosDisponiveis[i]);
                 }
             }
         }

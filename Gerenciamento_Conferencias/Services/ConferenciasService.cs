@@ -67,7 +67,13 @@ namespace Gerenciamento_Conferencias.Services
                     .Where(x => x.Id == trilha.Id)
                     .SelectMany(x => x.Palestras).ToList();
 
+                    var network = conferencia.Trilhas
+                    .Where(x => x.Id == trilha.Id)
+                    .Select(x => x.NetworkingEvent)
+                    .FirstOrDefault();
+
                     trilha.Palestras = palestras;
+                    trilha.Palestras.Add($"{network.Inicio} {network.Nome}");
                     trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.InicioNetworkingEvent);
                 }
             }
@@ -96,7 +102,13 @@ namespace Gerenciamento_Conferencias.Services
                 .Where(x => x.Id == trilha.Id)
                 .SelectMany(x => x.Palestras).ToList();
 
+                var network = conferencia.Trilhas
+                    .Where(x => x.Id == trilha.Id)
+                    .Select(x => x.NetworkingEvent)
+                    .FirstOrDefault();
+
                 trilha.Palestras = palestras;
+                trilha.Palestras.Add($"{network.Inicio} {network.Nome}");
                 trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.InicioNetworkingEvent);
             }
 

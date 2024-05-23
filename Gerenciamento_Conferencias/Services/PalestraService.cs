@@ -37,7 +37,7 @@ namespace Gerenciamento_Conferencias.Services
 
             var inicioPalestra = TimeSpan.Parse(palestraRequest.Inicio);
             var fimPalestra = inicioPalestra.Add(TimeSpan.FromMinutes(palestra.Duracao));
-            palestra.Sessao = fimPalestra.Hours < 12 ? Sessao.Matutino.ToString() : Sessao.Vespertino.ToString();
+            palestra.Sessao = fimPalestra.Hours <= 12 ? Sessao.Matutino.ToString() : Sessao.Vespertino.ToString();
 
             await _palestraRepository.CriarPalestraAsync(palestra);
         }
@@ -57,7 +57,7 @@ namespace Gerenciamento_Conferencias.Services
 
             var inicioPalestra = TimeSpan.Parse(palestraRequest.Inicio);
             var fimPalestra = inicioPalestra.Add(TimeSpan.FromMinutes(palestra.Duracao));
-            palestra.Sessao = fimPalestra.Hours < 12 ? Sessao.Matutino.ToString() : Sessao.Vespertino.ToString();
+            palestra.Sessao = fimPalestra.Hours <= 12 ? Sessao.Matutino.ToString() : Sessao.Vespertino.ToString();
 
             await _palestraRepository.AtualizarPalestraAsync(palestra);
         }

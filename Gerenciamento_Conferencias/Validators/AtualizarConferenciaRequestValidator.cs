@@ -9,17 +9,24 @@ namespace Gerenciamento_Conferencias.Validators
         public AtualizarConferenciaRequestValidator()
         {
             RuleFor(p => p.Id)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .WithMessage("O Id da conferência é obrigatório.");
 
             RuleFor(x => x.Nome)
-                .NotEmpty().WithMessage("O nome da conferência é obrigatório.");
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                .WithMessage("O nome da conferência é obrigatório.");
 
             RuleFor(x => x.Local)
-                .NotEmpty().WithMessage("O local da conferência é obrigatório.");
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                .WithMessage("O local da conferência é obrigatório.");
 
             RuleFor(x => x.Trilhas)
-                .NotEmpty().WithMessage("Pelo menos uma trilha é obrigatória.")
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                .WithMessage("Pelo menos uma trilha é obrigatória.")
                 .Must(trilhas => trilhas != null && trilhas.Count > 0).WithMessage("A conferência deve conter pelo menos uma trilha.")
                 .ForEach(trilha => trilha.SetValidator(new AtualizarTrilhaRequestValidator()));
         }

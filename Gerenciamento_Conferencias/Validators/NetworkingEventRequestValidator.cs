@@ -10,6 +10,7 @@ namespace Gerenciamento_Conferencias.Validators
         public NetworkingEventRequestValidator()
         {
             RuleFor(x => x.Inicio)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O horário de início é obrigatório.")
                 .Must(ValidarHorario).WithMessage("O horário de início deve estar no formato HH:mm.")
                 .Must(ValidarInicio).WithMessage("O horário de início deve ser entre 16:00 e 17:00.");

@@ -8,9 +8,11 @@ namespace Gerenciamento_Conferencias.Validators
         public TrilhaRequestValidator()
         {
             RuleFor(x => x.Nome)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O nome da trilha é obrigatório.");
 
             RuleFor(x => x.NetworkingEvent)
+                .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage("O evento de networking é obrigatório.")
                 .SetValidator(new NetworkingEventRequestValidator());
         }
