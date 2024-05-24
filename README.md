@@ -71,7 +71,7 @@ Substitua os valores em `"Data Source"`, `"Initial Catalog"`, `"User ID"` e `"pa
 
 - **Descrição**: Retorna uma lista de Palestras.
 - **Verbo HTTP**: GET
-- **Endpoint**: `/listar`
+- **Endpoint**: `/listar/{id}` (onde {id} é o identificador da Trilha que a Palestra está Cadastrada)
 
 #### Cadastro de Palestra
 
