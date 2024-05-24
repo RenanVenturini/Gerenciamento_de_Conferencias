@@ -75,8 +75,7 @@ namespace Gerenciamento_Conferencias.Migrations
                     Inicio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Duracao = table.Column<int>(type: "int", nullable: false),
                     TrilhaId = table.Column<int>(type: "int", nullable: false),
-                    Sessao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TrilhaId1 = table.Column<int>(type: "int", nullable: true)
+                    Sessao = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,11 +86,6 @@ namespace Gerenciamento_Conferencias.Migrations
                         principalTable: "TbTrilha",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TbPalestra_TbTrilha_TrilhaId1",
-                        column: x => x.TrilhaId1,
-                        principalTable: "TbTrilha",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -104,11 +98,6 @@ namespace Gerenciamento_Conferencias.Migrations
                 name: "IX_TbPalestra_TrilhaId",
                 table: "TbPalestra",
                 column: "TrilhaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TbPalestra_TrilhaId1",
-                table: "TbPalestra",
-                column: "TrilhaId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TbTrilha_ConferenciaId",

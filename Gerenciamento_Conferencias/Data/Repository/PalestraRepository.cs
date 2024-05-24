@@ -27,7 +27,7 @@ namespace Gerenciamento_Conferencias.Data.Repository
 
         public async Task<List<Palestra>> ListarPalestraAsync(int trilhaId)
             => await _context.Palestras
-            .Where(t => t.TrilhaId == trilhaId)
+            .Where(p => p.TrilhaId == trilhaId)
             .AsNoTracking()
             .ToListAsync();
 
