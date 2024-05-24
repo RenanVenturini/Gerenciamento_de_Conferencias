@@ -13,6 +13,8 @@ namespace Gerenciamento_Conferencias.Configuration
             services.AddScoped<IPalestraRepository, PalestraRepository>();
             services.AddScoped<IConferenciasService, ConferenciasService>();
             services.AddScoped<IPalestraService, PalestraService>();
+            services.AddScoped<ITrilhaRepository, TrilhaRepository>();
+            services.AddScoped<ITrilhaService, TrilhaService>();
         }
     }
 }

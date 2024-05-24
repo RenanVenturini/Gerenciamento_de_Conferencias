@@ -6,6 +6,5 @@ namespace Gerenciamento_Conferencias.Models.Request
     {
         public string Nome { get; set; }
         public string Local { get; set; }
-        public List<TrilhaRequest> Trilhas { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Gerenciamento_Conferencias.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PalestraController : Controller
+    public class PalestraController : ControllerBase
     {
         private readonly IPalestraService _palestraService;
 

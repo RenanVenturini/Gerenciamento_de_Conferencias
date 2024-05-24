@@ -7,6 +7,10 @@ namespace Gerenciamento_Conferencias.Validators
     {
         public TrilhaRequestValidator()
         {
+            RuleFor(x => x.ConferenciaId)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("O Id da conferência é obrigatório.");
+
             RuleFor(x => x.Nome)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O nome da trilha é obrigatório.");
