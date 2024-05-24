@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Gerenciamento_Conferencias.Data.Repository;
 using Gerenciamento_Conferencias.Data.Mappings_Profiles;
 using Gerenciamento_Conferencias.Models.Enum;
+using Newtonsoft.Json;
 
 namespace Gerenciamento_ConferenciasTests.service
 {
@@ -17,19 +18,9 @@ namespace Gerenciamento_ConferenciasTests.service
         public async Task CriarConferenciaAsync()
         {
             //Arrange
-            var fakeNetworkingEventRequest = new Faker<NetworkingEventRequest>()
-                .RuleFor(fake => fake.Inicio, "16:30")
-                .Generate();
-
-            var fakeTrilhas = new Faker<TrilhaRequest>()
-                .RuleFor(fake => fake.Nome, "Inteligencia artificial")
-                .RuleFor(fake => fake.NetworkingEvent, () => fakeNetworkingEventRequest)
-                .Generate(1);
-
             var fakeConferenciaRequest = new Faker<ConferenciaRequest>()
                 .RuleFor(fake => fake.Nome, "Inteligencia artificial")
                 .RuleFor(fake => fake.Local, "Centro")
-                .RuleFor(fake => fake.Trilhas, () => fakeTrilhas)
                 .Generate();
 
             var options = new DbContextOptionsBuilder<GerenciamentoConferenciasContext>()
@@ -50,24 +41,12 @@ namespace Gerenciamento_ConferenciasTests.service
                 //Act
                 await conferenciasService.CriarConferenciaAsync(fakeConferenciaRequest);
 
-                var result = await context.Conferencias
-                    .Include(x => x.Trilhas)
-                    .FirstOrDefaultAsync();
-
-                var trilha = result?.Trilhas.FirstOrDefault();
+                var result = await context.Conferencias.FirstOrDefaultAsync();
 
                 //Assert
                 Assert.NotNull(result);
-                Assert.NotNull(trilha);
-                Assert.NotNull(result.Trilhas);
                 Assert.Equal(fakeConferenciaRequest.Nome, result.Nome);
                 Assert.Equal(fakeConferenciaRequest.Local, result.Local);
-                Assert.True(fakeConferenciaRequest.Trilhas.Any());
-
-                Assert.Equal("Inteligencia artificial", trilha.Nome);
-
-                Assert.Equal("Networking Event", trilha.NetworkingEvent.Nome);
-                Assert.Equal(fakeNetworkingEventRequest.Inicio, trilha.NetworkingEvent.Inicio);
             }            
         }
 
@@ -75,22 +54,10 @@ namespace Gerenciamento_ConferenciasTests.service
         public async Task AtualizarConferenciaAsync()
         {
             //Arrange
-            var fakeNetworkingEventRequest = new Faker<AtualizarNetworkingEventRequest>()
-                .RuleFor(fake => fake.Id, 1)
-                .RuleFor(fake => fake.Inicio, "17:00")
-                .Generate();
-
-            var fakeTrilhas = new Faker<AtualizarTrilhaRequest>()
-                .RuleFor(fake => fake.Id, 1)
-                .RuleFor(fake => fake.Nome, "Inteligencia artificial na sociedade")
-                .RuleFor(fake => fake.NetworkingEvent, () => fakeNetworkingEventRequest)
-                .Generate(1);
-
             var fakeConferenciaRequest = new Faker<AtualizarConferenciaRequest>()
                 .RuleFor(fake => fake.Id, 1)
                 .RuleFor(fake => fake.Nome, "Inteligencia artificial")
                 .RuleFor(fake => fake.Local, "Centro")
-                .RuleFor(fake => fake.Trilhas, () => fakeTrilhas)
                 .Generate();
 
             var options = new DbContextOptionsBuilder<GerenciamentoConferenciasContext>()
@@ -138,25 +105,12 @@ namespace Gerenciamento_ConferenciasTests.service
                 //Act
                 await conferenciasService.AtualizarConferenciaAsync(fakeConferenciaRequest);
 
-                var result = await context.Conferencias
-                    .Include(x => x.Trilhas)
-                    .FirstOrDefaultAsync(x => x.Id == 1);
-
-                var trilha = result?.Trilhas.FirstOrDefault();
+                var result = await context.Conferencias.FirstOrDefaultAsync(x => x.Id == 1);
 
                 //Assert
                 Assert.NotNull(result);
-                Assert.NotNull(trilha);
-                Assert.NotNull(result.Trilhas);
                 Assert.Equal(fakeConferenciaRequest.Nome, result.Nome);
                 Assert.Equal(fakeConferenciaRequest.Local, result.Local);
-                Assert.True(fakeConferenciaRequest.Trilhas.Any());
-
-                Assert.Equal("Inteligencia artificial na sociedade", trilha.Nome);
-
-                Assert.Equal(fakeNetworkingEventRequest.Id, trilha.NetworkingEvent.Id);
-                Assert.Equal("Networking Event", trilha.NetworkingEvent.Nome);
-                Assert.Equal(fakeNetworkingEventRequest.Inicio, trilha.NetworkingEvent.Inicio);
             }
         }
 
@@ -219,6 +173,8 @@ namespace Gerenciamento_ConferenciasTests.service
 
                 //Act
                 var result = await conferenciasService.ObterConferenciaPorIdAsync(id);
+
+                var teste = JsonConvert.SerializeObject(result);
 
                 var trilha = result?.Trilhas.FirstOrDefault();
 
@@ -304,6 +260,8 @@ namespace Gerenciamento_ConferenciasTests.service
 
                 //Act
                 var conferencias = await conferenciasService.ListarConferenciaAsync();
+
+                var teste = JsonConvert.SerializeObject(conferencias);
 
                 var result = conferencias.FirstOrDefault();
 

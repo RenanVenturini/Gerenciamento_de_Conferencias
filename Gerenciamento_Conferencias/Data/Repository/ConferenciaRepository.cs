@@ -31,6 +31,7 @@ namespace Gerenciamento_Conferencias.Data.Repository
             .ThenInclude(p => p.Palestras)
             .Include(t => t.Trilhas)
             .ThenInclude(p => p.NetworkingEvent)
+            .AsNoTracking()
             .ToListAsync();
         public async Task<Conferencia> ObterConferenciaPorIdAsync(int id)
             => await _context.Conferencias
@@ -38,6 +39,7 @@ namespace Gerenciamento_Conferencias.Data.Repository
             .ThenInclude(p => p.Palestras)
             .Include(t => t.Trilhas)
             .ThenInclude(p => p.NetworkingEvent)
+            .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
 
         public async Task ExcluirConferenciaAsync(Conferencia conferencia)

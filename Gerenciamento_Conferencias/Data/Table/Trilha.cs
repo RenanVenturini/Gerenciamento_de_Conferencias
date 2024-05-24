@@ -7,5 +7,6 @@
         public int ConferenciaId { get; set; }
         public List<Palestra> Palestras { get; set; }
         public NetworkingEvent NetworkingEvent { get; set; }
+        public Conferencia Conferencia { get; set; }
     }
 }

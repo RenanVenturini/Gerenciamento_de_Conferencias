@@ -27,13 +27,14 @@ namespace Gerenciamento_Conferencias.Data.Repository
 
         public async Task<List<Palestra>> ListarPalestraAsync(int trilhaId)
             => await _context.Palestras
-            .Include(x => x.Trilha)
-            .ThenInclude(x => x.NetworkingEvent)
             .Where(t => t.TrilhaId == trilhaId)
+            .AsNoTracking()
             .ToListAsync();
 
         public async Task<Palestra> ObterPalestraPorId(int id)
-            => await _context.Palestras.FirstOrDefaultAsync(p => p.Id == id);
+            => await _context.Palestras
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == id);
 
         public async Task ExcluirPalestra(Palestra palestra)
         {
@@ -47,6 +48,7 @@ namespace Gerenciamento_Conferencias.Data.Repository
                 .Where(x => x.Id == trilhaId)
                 .Select(x => x.NetworkingEvent)
                 .Select(x => x.Inicio)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
     }

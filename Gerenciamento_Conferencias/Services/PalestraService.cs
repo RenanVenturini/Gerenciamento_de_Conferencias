@@ -45,6 +45,8 @@ namespace Gerenciamento_Conferencias.Services
         {
             var palestras = await _palestraRepository.ListarPalestraAsync(palestraRequest.TrilhaId);
 
+            palestras = palestras.Where(x => x.Id != palestraRequest.Id).ToList();
+
             var inicioNetworkIvent = await _palestraRepository.ObterNetwork(palestraRequest.TrilhaId);
 
             var validator = new AtualizarPalestraRequestValidator(ObterPalestrasDisponiveis(palestras, inicioNetworkIvent))

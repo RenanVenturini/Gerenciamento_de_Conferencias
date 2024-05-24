@@ -29,10 +29,15 @@ namespace Gerenciamento_Conferencias.Data.Repository
             => await _context.Trilhas
             .Include(x => x.Palestras)
             .Include(p => p.NetworkingEvent)
+            .AsNoTracking()
             .ToListAsync();
 
         public async Task<Trilha> ObterTrilhaPorId(int id)
-            => await _context.Trilhas.FirstOrDefaultAsync(p => p.Id == id);
+            => await _context.Trilhas
+            .Include(x => x.Palestras)
+            .Include(p => p.NetworkingEvent)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == id);
 
         public async Task ExcluirTrilhaAsync(Trilha trilha)
         {

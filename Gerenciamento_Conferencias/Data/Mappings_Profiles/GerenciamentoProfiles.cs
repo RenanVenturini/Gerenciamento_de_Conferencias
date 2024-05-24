@@ -17,11 +17,8 @@ namespace Gerenciamento_Conferencias.Data.Mappings_Profiles
             CreateMap<PalestraRequest, Palestra>();
             CreateMap<Conferencia, ConferenciaResponse>();
             CreateMap<Palestra, PalestraResponse>();
-            CreateMap<Trilha, TrilhaResponse>()
-                .ForMember(
-                    dest => dest.InicioNetworkingEvent,
-                    opt => opt.MapFrom(src => src.NetworkingEvent.Inicio)
-                );
+            CreateMap<Trilha, TrilhaResponse>();
+            CreateMap<NetworkingEvent, NetworkingEventResponse>();
             CreateMap<NetworkingEventRequest, NetworkingEvent>()
                 .ForMember(
                     dest => dest.Nome,

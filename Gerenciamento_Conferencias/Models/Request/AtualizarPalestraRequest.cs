@@ -2,7 +2,7 @@
 {
     public class AtualizarPalestraRequest
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Inicio { get; set; }
         public string Duracao { get; set; }

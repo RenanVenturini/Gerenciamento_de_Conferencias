@@ -21,12 +21,12 @@ namespace Gerenciamento_Conferencias.Data
 
             modelBuilder.Entity<Conferencia>()
                 .HasMany(c => c.Trilhas)
-                .WithOne()
+                .WithOne(x => x.Conferencia)
                 .HasForeignKey(t => t.ConferenciaId);
 
             modelBuilder.Entity<Trilha>()
                 .HasMany(t => t.Palestras)
-                .WithOne()
+                .WithOne(x => x.Trilha)
                 .HasForeignKey(p => p.TrilhaId);
 
             modelBuilder.Entity<Trilha>()

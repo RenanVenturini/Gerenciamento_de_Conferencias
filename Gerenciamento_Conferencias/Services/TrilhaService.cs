@@ -50,7 +50,32 @@ namespace Gerenciamento_Conferencias.Services
         public async Task<IEnumerable<TrilhaResponse>> ListarTrilhaAsync()
         {
             var trilhas = await _trilhaRepository.ListarTrilhaAsync();
-            return _mapper.Map<IEnumerable<TrilhaResponse>>(trilhas);
+
+            var response = _mapper.Map<IEnumerable<TrilhaResponse>>(trilhas);
+
+            foreach (var trilha in response)
+            {
+                var palestras = trilhas
+                    .Where(x => x.Id == trilha.Id)
+                    .SelectMany(x => x.Palestras)
+                    .Select(x => $"{x.Inicio} {x.Nome} {x.Duracao}min")
+                    .ToList();
+
+                var horarios = trilhas
+                .Where(x => x.Id == trilha.Id)
+                .SelectMany(x => x.Palestras).ToList();
+
+                var network = trilhas
+                .Where(x => x.Id == trilha.Id)
+                .Select(x => x.NetworkingEvent)
+                .FirstOrDefault();
+
+                trilha.Palestras = palestras;
+                trilha.Palestras.Add($"{network.Inicio} {network.Nome}");
+                trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.NetworkingEvent.Inicio);
+            }
+
+            return response;
         }
           
 
@@ -58,7 +83,21 @@ namespace Gerenciamento_Conferencias.Services
         {
             var trilha = await _trilhaRepository.ObterTrilhaPorId(id);
 
-            return _mapper.Map<TrilhaResponse>(trilha);
+            var response = _mapper.Map<TrilhaResponse>(trilha);
+
+            var palestras = trilha.Palestras
+                    .Select(x => $"{x.Inicio} {x.Nome} {x.Duracao}min")
+                    .ToList();
+
+            var horarios = trilha.Palestras.ToList();
+
+            var network = trilha.NetworkingEvent;
+
+            response.Palestras = palestras;
+            response.Palestras.Add($"{network.Inicio} {network.Nome}");
+            response.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.NetworkingEvent.Inicio);
+
+            return response;
         }
 
         public async Task ExcluirTrilhaAsync(int id)

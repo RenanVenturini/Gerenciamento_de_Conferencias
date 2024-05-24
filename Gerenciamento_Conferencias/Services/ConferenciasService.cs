@@ -74,7 +74,7 @@ namespace Gerenciamento_Conferencias.Services
 
                     trilha.Palestras = palestras;
                     trilha.Palestras.Add($"{network.Inicio} {network.Nome}");
-                    trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.InicioNetworkingEvent);
+                    trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.NetworkingEvent.Inicio);
                 }
             }
 
@@ -109,7 +109,7 @@ namespace Gerenciamento_Conferencias.Services
 
                 trilha.Palestras = palestras;
                 trilha.Palestras.Add($"{network.Inicio} {network.Nome}");
-                trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.InicioNetworkingEvent);
+                trilha.HorariosDisponiveis = PalestraService.ObterPalestrasDisponiveis(horarios, trilha.NetworkingEvent.Inicio);
             }
 
             return response;
