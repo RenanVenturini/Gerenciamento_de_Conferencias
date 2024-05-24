@@ -1,6 +1,6 @@
-# Gerenciamento de Conferências
+# Sistema de Gerenciamento de Conferências
 
-Esta é uma API para um Sistema de Gerenciamento de Conferências.
+Este projeto é um sistema de gerenciamento de conferências projetado para ajudar a organizar uma conferência de programação. Ele distribui diversas palestras em várias trilhas, respeitando os horários de início e término das sessões matutinas e vespertinas, além de garantir que o evento de networking ocorra no horário adequado.
 
 ## Configuração do Banco de Dados
 
