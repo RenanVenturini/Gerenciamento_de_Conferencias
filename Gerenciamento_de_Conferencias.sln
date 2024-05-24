@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1BA070EE-684
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{AE530CAA-94BC-4C8B-A316-B3557911A241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento_Conferencias", "Gerenciamento_Conferencias\Gerenciamento_Conferencias.csproj", "{8F1A9936-86B1-4709-85EE-945064FA7588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerenciamento_Conferencias", "Gerenciamento_Conferencias\Gerenciamento_Conferencias.csproj", "{8F1A9936-86B1-4709-85EE-945064FA7588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento_ConferenciasTests", "Gerenciamento_ConferenciasTests\Gerenciamento_ConferenciasTests.csproj", "{4C58008C-4024-4ED1-94FD-AAE50BC7749D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{8F1A9936-86B1-4709-85EE-945064FA7588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F1A9936-86B1-4709-85EE-945064FA7588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F1A9936-86B1-4709-85EE-945064FA7588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C58008C-4024-4ED1-94FD-AAE50BC7749D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C58008C-4024-4ED1-94FD-AAE50BC7749D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C58008C-4024-4ED1-94FD-AAE50BC7749D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C58008C-4024-4ED1-94FD-AAE50BC7749D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,6 +32,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AE530CAA-94BC-4C8B-A316-B3557911A241} = {1BA070EE-6847-4B80-90BC-94B7B158FC96}
 		{8F1A9936-86B1-4709-85EE-945064FA7588} = {AE530CAA-94BC-4C8B-A316-B3557911A241}
+		{4C58008C-4024-4ED1-94FD-AAE50BC7749D} = {AE530CAA-94BC-4C8B-A316-B3557911A241}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4D671AF-A718-43E0-B517-785815E7DD25}
